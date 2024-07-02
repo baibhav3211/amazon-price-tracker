@@ -58,7 +58,7 @@ const sendEmail = async (prices) => {
 
     let mailOptions = {
         from: `"Price Checker" <${process.env.EMAIL}>`,
-        to: 'recipient-email@example.com',
+        to: 'vibespen@gmail.com',
         subject: 'Amazon Product Prices',
         text: emailContent
     };
@@ -84,7 +84,7 @@ const fetchPricesAndSendEmail = async () => {
     }
 };
 
-cron.schedule('0 8 * * *', () => {
+cron.schedule('0 9 * * *', () => {
     console.log('Fetching prices and sending email...');
     fetchPricesAndSendEmail();
 });
