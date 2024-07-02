@@ -1,14 +1,14 @@
-name: Daily Amazon Price Check
+name: Deploy to Vercel
 
 on:
-  schedule:
-    - cron: '5 9 * * *'
   push:
     branches:
       - main
+  schedule:
+    - cron: '45 9 * * *'  # Runs daily at 9:05 AM
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +23,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run the price checker
+      - name: Deploy to Vercel
         env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           EMAIL: ${{ secrets.EMAIL }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-        run: node index.js
+        run: |
+          npm run build
+          npx vercel --prod --token $VERCEL_TOKEN

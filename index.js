@@ -84,9 +84,8 @@ const fetchPricesAndSendEmail = async () => {
     }
 };
 
-cron.schedule('0 9 * * *', () => {
+// Schedule the job to run daily at 9:00 AM
+cron.schedule('45 9 * * *', () => {
     console.log('Fetching prices and sending email...');
     fetchPricesAndSendEmail();
 });
-
-fetchPricesAndSendEmail();
